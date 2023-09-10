@@ -138,6 +138,53 @@ giveBudget: function(){
 }) ();
 
 // App Controller 
-var controller = (function(){
+var controller = (function(uiCtrl, budgetCtrl){
+// clicks 
+var btnCtrl = uiCtrl.inputString();
+var clicks =  function(){
+    document.querySelector(btnCtrl.btn).addEventListener("click", addItem)
+    document.addEventListener("keypress", function(event){
+        if(event.keyCode === 13 || event.which === 13 ){
+            addItem()
+        }
+    })
+} 
 
-}) ();
+var addItem = function(){
+            // collects data from UI input
+    var inputs = uiCtrl.inputvalues();
+    console.log(inputs);
+    if(inputs.description !== "" && !isNaN(inputs.value) && inputs.value > 0){
+// Add item to budget controller
+var newItem = budgetController.inputItem(inputs.addType, inputs.description, inputs.value)
+// Push new item to UI
+uiCtrl.addItem(newItem, inputs.addType);
+uiCtrl.clearField();
+    } 
+    updateBudget();
+}
+
+var updateBudget = function(){
+// calculate budget
+budgetCtrl.calcBudget();
+// return budget
+var budget = budgetCtrl.giveBudget();
+// update budget to the UI
+uiCtrl.printBudget(budget)
+}
+
+return{
+ init: function(){
+clicks();
+
+uiCtrl.printBudget({
+totalInc: 0,
+totalExp: 0,
+budget: 0,
+percent: 0
+});
+
+}
+};
+}) (uiControl, budgetController);
+controller.init();
