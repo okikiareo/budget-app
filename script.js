@@ -89,7 +89,52 @@ var data = {
         exp:0
     },
     budget: 0,
+    percentage: -1
+};
+var calcTotal = function(type){
+var sum = 0;
+data.allItems[type].forEach(function(curr){
+sum += curr.value;
+data.total[type] = sum;
+})
+}
+// takes it out to fetch data from inputs and form either inc or exp
 
+// Check if it's inc or exp so to konw which to pass
+return{
+    inputItem: function(type, description, value){
+        var newItem, ID;
+         
+        if(ID > 0){
+             ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+        } else{ID = 0}
+       if(type ==="inc"){
+           newItem  = new Income(ID, description, value);
+        } else if(type === "exp"){
+            newItem = new Expenses(ID, description, value);
+        }
+        // push into data 
+         data.allItems[type].push(newItem)
+        //  give back new item
+     return newItem
+    },
+    calcBudget: function(type){
+// Add income and expense
+calcTotal("inc");
+calcTotal("exp");
+data.budget = data.total.inc - data.total.exp;
+if(data.total.inc > 0){
+    data.percentage = Math.floor( (data.total.exp / data.total.inc) * 100)
+} else{data.percentage = -1}
+    },
+giveBudget: function(){
+    return{
+        totalInc: data.total.inc,
+        totalExp: data.total.exp,
+        budget: data.budget,
+        percent: data.percentage
+    }
+}}
 }) ();
 
 // App Controller 
