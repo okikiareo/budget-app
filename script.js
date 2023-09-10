@@ -53,10 +53,42 @@ addItem: function(obj, type){
     // Going back to the first field after input
     fieldArr[0].focus();
     },
+// give out the values to app controller to print 
+printBudget: function(obj){
+    document.querySelector(classString.TotalBudget).textContent = obj.budget;
+    document.querySelector(classString.incTotal).textContent = obj.totalInc;
+    document.querySelector(classString.expTotal).textContent = obj.totalExp;
+    if(obj.percent > 0){
+         document.querySelector(classString.experc).textContent = obj.percent;
+    } else{document.querySelector(classString.experc).textContent = "--";}
+   
+}
+}
 }) ();
 
 // Budget logic Controller
 var budgetController = (function(){
+// Performs the logic and store data
+var Expenses = function(id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+}
+var Income = function(id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+}
+var data = {
+    allItems: {
+        inc: [],
+        exp: []
+    },
+    total:{
+        inc:0,
+        exp:0
+    },
+    budget: 0,
 
 }) ();
 
