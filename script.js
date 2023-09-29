@@ -30,9 +30,9 @@ var uiControl = (function(){
     var html, newHtml, element;
     if(type === "inc"){
         element = classString.incomeList;
-        html = '<div class="item clearfix" id="income-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">+ %value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+        html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">+ %value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
     } else if(type === "exp"){
-        html = '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">- %value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">- %value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
         element = classString.expenseList;
     }
     newHtml =  html.replace("%id%", obj.id);
@@ -118,7 +118,21 @@ var uiControl = (function(){
             //  give back new item
          return newItem
         },
-        calcBudget: function(type){
+    
+        // function of deleting an item
+        deleteItem: function(type, id){
+         var index, ids;
+         ids = data.allItems[type].map(function (current){
+             return current.id;
+         })
+         index = ids.indexOf(id);
+    
+         if(index !== -1){
+             data.allItems[type].splice(index, 1);
+         }
+        },
+    
+        calcBudget: function(){
     // Add income and expense
     calcTotal("inc");
     calcTotal("exp");
@@ -168,7 +182,15 @@ var uiControl = (function(){
             updateBudget();
         }
     var deleteItem = function(event){
-        console.log(event.target.parentNode.parentNode.parentNode.parentNode.id)
+        var itemID, splitid;
+    itemID =   event.target.parentNode.parentNode.parentNode.parentNode.id;
+       if(itemID){
+     splitid = itemID.split("-");
+     var type = splitid[0];
+     var ID = splitid[1];
+     console.log(itemID)
+    }
+    
     }
         var updateBudget = function(){
     // calculate budget
