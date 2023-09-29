@@ -61,6 +61,10 @@ var uiControl = (function(){
              document.querySelector(classString.experc).textContent = obj.percent;
         } else{document.querySelector(classString.experc).textContent = "--";}
        
+    },
+    remove: function(delID){
+    var elem = document.getElementById(delID); 
+    elem.parentNode.removeChild(elem)
     }
     }
     })();
@@ -107,7 +111,9 @@ var uiControl = (function(){
              
             if(data.allItems[type].length  > 0){
                  ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
-            } else{ID = 0}
+            } else{
+                ID = 0
+            }
            if(type ==="inc"){
                newItem  = new Income(ID, description, value);
             } else if(type === "exp"){
@@ -120,7 +126,7 @@ var uiControl = (function(){
         },
     
         // function of deleting an item
-        deleteItem: function(type, id){
+        delete: function(type, id){
          var index, ids;
          ids = data.allItems[type].map(function (current){
              return current.id;
@@ -168,6 +174,16 @@ var uiControl = (function(){
                 document.querySelector(btnCtrl.container).addEventListener("click", deleteItem)
         } 
         
+        var updateBudget = function(){
+            // calculate budget
+               budgetCtrl.calcBudget();
+            // return budget
+            var budget = budgetCtrl.giveBudget();
+            // update budget to the UI
+            uiCtrl.printBudget(budget)
+            }
+            
+    
         var addItem = function(){
                     // collects data from UI input
             var inputs = uiCtrl.inputvalues();
@@ -187,20 +203,18 @@ var uiControl = (function(){
        if(itemID){
      splitid = itemID.split("-");
      var type = splitid[0];
-     var ID = splitid[1];
-     console.log(itemID)
+     var ID = parseInt(splitid[1]);
+     
+    //  delete from database
+     budgetCtrl.delete(type, ID)
+    //  delete from UI
+    uiCtrl.remove(itemID);
+    
+    updateBudget();
     }
     
     }
-        var updateBudget = function(){
-    // calculate budget
-       budgetCtrl.calcBudget();
-    // return budget
-    var budget = budgetCtrl.giveBudget();
-    // update budget to the UI
-    uiCtrl.printBudget(budget)
-    }
-    
+       
     return{
          init: function(){
     clicks();
