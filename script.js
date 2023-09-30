@@ -77,12 +77,25 @@ var uiControl = (function(){
         this.id = id;
         this.description = description;
         this.value = value;
+        this.percent = -1
     }
     var Income = function(id, description, value){
         this.id = id;
         this.description = description;
         this.value = value;
     }
+    Expenses.prototype.calcPercent = function(totalInc){
+    if(totalInc > 0){
+        this.percent = Math.round((this.value / totalInc) * 100)
+    }
+    else{
+        this.percent = -1
+    }
+    }
+    Expenses.prototype.getPercent = function(){
+        return this.percent
+    }
+    
     var data = {
         allItems: {
             inc: [],
@@ -146,7 +159,8 @@ var uiControl = (function(){
     if(data.total.inc > 0){
         data.percentage = Math.floor( (data.total.exp / data.total.inc) * 100)
     } else{data.percentage = -1}
-        },
+     },
+        
     giveBudget: function(){
         return{
             totalInc: data.total.inc,
@@ -154,6 +168,17 @@ var uiControl = (function(){
             budget: data.budget,
             percent: data.percentage
         }
+    },
+    calcPercentage: function(){
+        data.allItems.exp.forEach(function(cur){
+            cur.calcPercent(data.total.inc);
+        })
+    },
+    getPercentage: function(){
+    var allPercent = data.allItems.exp.map(function(cur){
+      return cur.getPercent();
+    })
+    return allPercent;
     }
     }
     
@@ -164,15 +189,17 @@ var uiControl = (function(){
     // App controller
     var controller = (function (uiCtrl, budgetCtrl){
     // clicks 
-     var btnCtrl = uiCtrl.inputString();
+     
         var clicks =  function(){
+            var btnCtrl = uiCtrl.inputString();
             document.querySelector(btnCtrl.btn).addEventListener("click", addItem)
             document.addEventListener("keypress", function(event){
                 if(event.keyCode === 13 || event.which === 13 ){
                     addItem()
-                }})
+                }});
                 document.querySelector(btnCtrl.container).addEventListener("click", deleteItem)
-        } 
+        
+            } 
         
         var updateBudget = function(){
             // calculate budget
@@ -194,27 +221,38 @@ var uiControl = (function(){
       // Push new item to UI
       uiCtrl.addItem(newItem, inputs.addType);
       uiCtrl.clearField();
+               updateBudget(); 
+               updatePrcent();
             } 
-            updateBudget();
-        }
+            console.log("added")
+        };
+    
     var deleteItem = function(event){
-        var itemID, splitid;
+        var itemID, splitid, type, ID;
     itemID =   event.target.parentNode.parentNode.parentNode.parentNode.id;
+    
        if(itemID){
      splitid = itemID.split("-");
-     var type = splitid[0];
-     var ID = parseInt(splitid[1]);
+      type = splitid[0];
+      ID = parseInt(splitid[1]);
      
     //  delete from database
-     budgetCtrl.delete(type, ID)
+     budgetCtrl.delete(type, ID);
     //  delete from UI
     uiCtrl.remove(itemID);
     
     updateBudget();
+    updatePrcent()
     }
-    
     }
-       
+     var updatePrcent = function () {
+        //  calculate percentage 
+        budgetCtrl.calcPercentage()
+        // read from budget controller
+    var percentage = budgetCtrl.getPercentage();
+        // update percentage to ui 
+        console.log(percentage)
+      }
     return{
          init: function(){
     clicks();
