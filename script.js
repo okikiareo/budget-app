@@ -12,8 +12,26 @@ var uiControl = (function(){
     incTotal: ".budget__income--value",
     expTotal: ".budget__expenses--value",
     experc: ".budget__expenses--percentage",
-    container: ".container"
+    container: ".container",
+    expercent: ".item__percentage"
     }
+     var formatString = function(num, type){
+    var numSplit, int, dec;
+    
+    num = Math.abs(num);
+    num = num.toFixed(2);
+    12345
+    numSplit = num.split(".");
+    int = numSplit[0];
+    dec = numSplit[1];
+    if(int.length > 3){
+        int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3)
+    }
+    
+    return (type === "exp" ? "-" : "+") + ' ' + int + "." + dec;
+    // return int + "." + dec;
+     }
+    
     return {
     inputvalues: function(){
         return{
@@ -30,14 +48,14 @@ var uiControl = (function(){
     var html, newHtml, element;
     if(type === "inc"){
         element = classString.incomeList;
-        html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">+ %value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+        html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value"> %value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
     } else if(type === "exp"){
-        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">- %value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+        html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value"> %value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
         element = classString.expenseList;
     }
     newHtml =  html.replace("%id%", obj.id);
     newHtml = newHtml.replace("%description%", obj.description);
-    newHtml = newHtml.replace("%value%", obj.value);
+    newHtml = newHtml.replace("%value%", formatString(obj.value, type));
     
     document.querySelector(element).insertAdjacentHTML("beforeend", newHtml);
     },
@@ -54,13 +72,38 @@ var uiControl = (function(){
     },
     // give out the values to app controller to print 
     printBudget: function(obj){
-        document.querySelector(classString.TotalBudget).textContent = obj.budget;
-        document.querySelector(classString.incTotal).textContent = obj.totalInc;
-        document.querySelector(classString.expTotal).textContent = obj.totalExp;
+    
+        var type;
+        // Ternary operator
+        obj.budget > 0 ? type = "inc": type = "exp" ;
+    
+        
+        document.querySelector(classString.TotalBudget).textContent = formatString(obj.budget, type);
+        document.querySelector(classString.incTotal).textContent = formatString(obj.totalInc, "inc") ;
+        document.querySelector(classString.expTotal).textContent = formatString(obj.totalExp, "exp");
         if(obj.percent > 0){
              document.querySelector(classString.experc).textContent = obj.percent;
         } else{document.querySelector(classString.experc).textContent = "--";}
        
+    },
+    printpercent: function(percentages){
+        var expFields = document.querySelectorAll(classString.expercent);
+    
+        var eachNode = function(list, callback){
+        for(var i = 0; i < list.length; i++){
+        callback(list[i], i)
+        };
+    }
+        eachNode(expFields, function(current, index){
+            if(percentages[index] > 0){
+                current.textContent = percentages[index] + "%";
+            }
+            else{
+                current.textContent = "--";
+            }
+        }
+        )
+        
     },
     remove: function(delID){
     var elem = document.getElementById(delID); 
@@ -251,6 +294,7 @@ var uiControl = (function(){
         // read from budget controller
     var percentage = budgetCtrl.getPercentage();
         // update percentage to ui 
+        uiCtrl.printpercent(percentage)
         console.log(percentage)
       }
     return{
@@ -270,3 +314,5 @@ var uiControl = (function(){
     })(uiControl, budgetController);
     
     controller.init(); 
+    
+    
