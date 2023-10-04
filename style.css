@@ -280,10 +280,6 @@ h2 {
 @media(max-width: 1000px){
 .container{
     margin-left: 1rem;
-
-}
-.item{
-    /* width: 100%; */
 }
 .income, .expenses{
 max-width: 375px;
@@ -337,11 +333,17 @@ max-width: 375px;
                             .income, .expenses{
                             max-width: 340px;
                           } 
-                      
+                          .budget__value{
+                              font-size: 1.8rem;
+                          }
+                          .icome__title, .expenses__title{
+                              font-size: 1rem;
+                          }
                           }
                           @media(max-width: 380px){
                             .income, .expenses{
                             max-width: 300px;
+                            margin-bottom: 1.5rem;
                           } 
                        
                         .budget{
@@ -350,12 +352,40 @@ max-width: 375px;
                           }
                           @media(max-width: 325px){
                             .income, .expenses{
-                            max-width: 300px;
+                            max-width: 260px;
                           } 
                           .add__description {
                             width: 250px;
                         }
                         .budget{
                            max-width : 250px;
+                        }
+                          }
+                          @media(max-width: 280px){
+                            .income, .expenses{
+                            max-width: 240px;
+                          } 
+                          .container{
+                            margin-left: .5rem;
+                        }
+                        .budget{
+                            max-width : 230px;
+                         }
+                         .add__description {
+                            width: 230px;
+                        }
+                          }
+                          @media(max-width: 255px){
+                            .income, .expenses{
+                            max-width: 230px;
+                          } 
+                          .container{
+                            margin-left: .5rem;
+                        }
+                        .budget{
+                            max-width : 210px;
+                         }
+                         .add__description {
+                            width: 210px;
                         }
                           }
