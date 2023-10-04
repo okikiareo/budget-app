@@ -173,9 +173,13 @@ TOP PART
 
 /***** LISTS *****/
 .container {
-    width: 1000px;
+    /* width: 1000px; */
     margin: 60px auto;
 }
+.flex{
+    display: flex;
+}
+
 
 .income {
     float: left;
@@ -273,4 +277,85 @@ h2 {
 .unpaid:hover .item__description { font-weight: 900; }
 
 
+@media(max-width: 1000px){
+.container{
+    margin-left: 1rem;
 
+}
+.item{
+    /* width: 100%; */
+}
+.income, .expenses{
+max-width: 375px;
+}
+}
+
+@media(max-width: 815px){
+    .income, .expenses{
+    max-width: 350px;
+    }
+    }
+    @media(max-width: 765px){
+        
+        .income, .expenses{
+        max-width: 330px;
+        }
+        }
+        @media(max-width: 725px){
+           
+            .income, .expenses{
+            max-width: 300px;
+            }
+            }
+            @media(max-width: 670px){
+                .income, .expenses{
+                max-width: 470px;
+                }
+                }
+                @media(max-width: 555px){
+                    .income, .expenses{
+                    max-width: 420px;
+                    }
+                    }
+                    @media(max-width: 500px){
+                        .income, .expenses{
+                        /* max-width: 350px; */
+                        }
+                        .flex{
+                            display: inline;
+                        }
+                        }
+                        @media(max-width: 450px){
+                            .income, .expenses{
+                            max-width: 360px;
+                          } 
+                          .add__description {
+                            width: 300px;
+                        }
+                          }
+                          @media(max-width: 410px){
+                            .income, .expenses{
+                            max-width: 340px;
+                          } 
+                      
+                          }
+                          @media(max-width: 380px){
+                            .income, .expenses{
+                            max-width: 300px;
+                          } 
+                       
+                        .budget{
+                           width : 300px;
+                        }
+                          }
+                          @media(max-width: 325px){
+                            .income, .expenses{
+                            max-width: 300px;
+                          } 
+                          .add__description {
+                            width: 250px;
+                        }
+                        .budget{
+                           max-width : 250px;
+                        }
+                          }
