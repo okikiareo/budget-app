@@ -1,0 +1,110 @@
+
+@media(max-width: 1000px){
+    .container{
+        margin-left: 1rem;
+    }
+    .income, .expenses{
+    max-width: 375px;
+    }
+    }
+    
+    @media(max-width: 815px){
+        .income, .expenses{
+        max-width: 350px;
+        }
+        }
+        @media(max-width: 765px){
+            
+            .income, .expenses{
+            max-width: 330px;
+            }
+            }
+            @media(max-width: 725px){
+               
+                .income, .expenses{
+                max-width: 300px;
+                }
+                }
+                @media(max-width: 670px){
+                    .income, .expenses{
+                    max-width: 470px;
+                    }
+                    }
+                    @media(max-width: 555px){
+                        .income, .expenses{
+                        max-width: 420px;
+                        }
+                        }
+                        @media(max-width: 500px){
+                            .flex{
+                                display: inline;
+                            }
+                            }
+                            @media(max-width: 450px){
+                                .income, .expenses{
+                                max-width: 360px;
+                              } 
+                              .add__description {
+                                width: 300px;
+                            }
+                              }
+                              @media(max-width: 410px){
+                                .income, .expenses{
+                                max-width: 340px;
+                              } 
+                              .budget__value{
+                                  font-size: 1.8rem;
+                              }
+                              .icome__title, .expenses__title{
+                                  font-size: 1rem;
+                              }
+                              }
+                              @media(max-width: 380px){
+                                .income, .expenses{
+                                max-width: 300px;
+                                margin-bottom: 1.5rem;
+                              } 
+                           
+                            .budget{
+                               width : 300px;
+                            }
+                              }
+                              @media(max-width: 325px){
+                                .income, .expenses{
+                                max-width: 260px;
+                              } 
+                              .add__description {
+                                width: 250px;
+                            }
+                            .budget{
+                               max-width : 250px;
+                            }
+                              }
+                              @media(max-width: 280px){
+                                .income, .expenses{
+                                max-width: 240px;
+                              } 
+                              .container{
+                                margin-left: .5rem;
+                            }
+                            .budget{
+                                max-width : 230px;
+                             }
+                             .add__description {
+                                width: 230px;
+                            }
+                              }
+                              @media(max-width: 255px){
+                                .income, .expenses{
+                                max-width: 230px;
+                              } 
+                              .container{
+                                margin-left: .5rem;
+                            }
+                            .budget{
+                                max-width : 210px;
+                             }
+                             .add__description {
+                                width: 210px;
+                            }
+                              }
