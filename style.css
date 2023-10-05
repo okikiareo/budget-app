@@ -29,9 +29,9 @@ TOP PART
 */
 .top {
     height: 40vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(back.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(cal.jpg);
     background-size: cover;
-    background-position: center;
+    background-position:bottom;
     position: relative;
 }
 
@@ -173,7 +173,7 @@ TOP PART
 
 /***** LISTS *****/
 .container {
-    width: 1000px;
+    /* width: 1000px; */
     margin: 60px auto;
 }
 .flex{
