@@ -285,43 +285,43 @@
   
 @media(max-width: 1000px){
     .container{
-        margin-left: 1rem;
+        margin-left: 1rem !important;
     }
     .income, .expenses{
-    max-width: 375px;
+    max-width: 375px !important;
     }
     }
     
     @media(max-width: 815px){
       .income, .expenses{
-      max-width: 350px;
+      max-width: 350px !important;
       }
       }
       @media(max-width: 765px){
       
       .income, .expenses{
-      max-width: 330px;
+      max-width: 330px ;
       }
       }
     @media(max-width: 725px){
       
       .income, .expenses{
-      max-width: 300px;
+      max-width: 300px !important;
       }
       }
       @media(max-width: 670px){
         .income, .expenses{
-        max-width: 470px;
+        max-width: 470px !important;
         }
         }
         @media(max-width: 555px){
       .income, .expenses{
-      max-width: 420px;
+      max-width: 420px !important;
       }
       }
     @media(max-width: 500px){
       .flex{
-          display: inline;
+          display: inline !important;
       }
       }
     @media(max-width: 450px){
@@ -329,67 +329,67 @@
           max-width: 360px;
         } 
         .add__description {
-          width: 300px;
+          width: 300px !important;
       }
         }
      @media(max-width: 410px){
           .income, .expenses{
-          max-width: 340px;
+          max-width: 340px !important;
         } 
         .budget__value{
-            font-size: 1.8rem;
+            font-size: 1.8rem !important;
         }
         .icome__title, .expenses__title{
-            font-size: 1rem;
+            font-size: 1rem !important;
         }
         }
     @media(max-width: 380px){
           .income, .expenses{
-          max-width: 300px;
-          margin-bottom: 1.5rem;
+          max-width: 300px !important;
+          margin-bottom: 1.5rem !important;
         } 
       
       .budget{
-          width : 300px;
+          width : 300px !important;
       }
         }
     @media(max-width: 325px){
           .income, .expenses{
-          max-width: 260px;
+          max-width: 260px !important;
         } 
         .add__description {
-          width: 250px;
+          width: 250px !important;
       }
       .budget{
-          max-width : 250px;
+          max-width : 250px !important;
       }
         }
         @media(max-width: 280px){
           .income, .expenses{
-          max-width: 240px;
+          max-width: 240px !important;
         } 
         .container{
-          margin-left: .5rem;
+          margin-left: .5rem !important;
       }
       .budget{
-          max-width : 230px;
+          max-width : 230px !important;
         }
         .add__description {
-          width: 230px;
+          width: 230px !important;
       }
         }
     @media(max-width: 255px){
         .income, .expenses{
-          max-width: 230px;
+          max-width: 230px !important;
         } 
         .container{
-          margin-left: .5rem;
+          margin-left: .5rem !important;
         }
         .budget{
-          max-width : 210px;
+          max-width : 210px !important;
         }
         .add__description {
-          width: 210px;
+          width: 210px !important;
         }
     }
     
