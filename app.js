@@ -55,11 +55,7 @@ var budgetController = (function() {
     
     return {
         addItem: function(type, des, val) {
-            var newItem, ID;
-            
-            //[1 2 3 4 5], next ID = 6
-            //[1 2 4 6 8], next ID = 9
-            // ID = last ID + 1
+            var newItem, ID
             
             // Create new ID
             if (data.allItems[type].length > 0) {
@@ -86,10 +82,7 @@ var budgetController = (function() {
         deleteItem: function(type, id) {
             var ids, index;
             
-            // id = 6
-            //data.allItems[type][id];
-            // ids = [1 2 4  8]
-            //index = 3
+          
             
             ids = data.allItems[type].map(function(current) {
                 return current.id;
@@ -119,21 +112,10 @@ var budgetController = (function() {
             } else {
                 data.percentage = -1;
             }            
-            
-            // Expense = 100 and income 300, spent 33.333% = 100/300 = 0.3333 * 100
-        },
+                    },
         
         calculatePercentages: function() {
-            
-            /*
-            a=20
-            b=10
-            c=40
-            income = 100
-            a=20/100=20%
-            b=10/100=10%
-            c=40/100=40%
-            */
+          
             
             data.allItems.exp.forEach(function(cur) {
                cur.calcPercentage(data.totals.inc);
